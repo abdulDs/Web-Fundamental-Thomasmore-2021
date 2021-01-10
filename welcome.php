@@ -35,9 +35,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <?php
     $preferred_gender = $_SESSION['prefgender'];
     $user_id = $_SESSION['id'];
-    // $rows =  GetQuery("SELECT * FROM user WHERE gender='$preferred_gender' and id != '$user_id'");
-    // queying all users exept 
-    $rows = GetQuery("SELECT * from user where id not in (select matched_id from matches where matcher_id ='$user_id') and gender='$preferred_gender'");
+    $rows = GetQuery("SELECT * from user where id not in (select matched_id from matches where matcher_id ='$user_id') and gender='$preferred_gender' and id != '$user_id'");
     ?>
     <!-- Create a card -->
     <?php foreach ($rows as $row) { ?>
