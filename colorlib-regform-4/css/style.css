@@ -1,0 +1,88 @@
+/* ==========================================================================
+   #CSS MONOPOlY
+   ========================================================================== */
+
+.was-active {
+    display: none;
+}
+
+.card {
+    width: 22rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.card-title {
+    color: black;
+}
+
+.card-text {
+    color: black;
+}
+
+body {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 1000%;
+    animation: gradient 15s ease infinite;
+    text-align: center;
+}
+
+.footer {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 1000%;
+    animation: gradient 15s ease infinite;
+    text-align: center;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.tinder--buttons {
+    flex: 0 0 100px;
+    text-align: center;
+    padding-right: 20px;
+}
+
+.tinder--buttons button {
+    border-radius: 50%;
+    line-height: 60px;
+    width: 60px;
+    border: 0;
+    background: #FFFFFF;
+    display: inline-block;
+    margin: 0 8px;
+}
+
+.tinder--buttons button:focus {
+    outline: 0;
+}
+
+.tinder--buttons i {
+    font-size: 36px;
+    vertical-align: middle;
+}
+
+.fa-heart {
+    color: #FFACE4;
+}
+
+.fa-thumbs-down {
+    color: #CDD6DD;
+}
+
+#love {
+    margin: 5px;
+}
+
+#nope {
+    margin: 5px;
+}
