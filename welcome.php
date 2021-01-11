@@ -19,7 +19,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.">
     <title>Document</title>
-    <link rel="stylesheet" href="./colorlib-regform-4/css/style.css">
+    <link rel="stylesheet" href="../colorlib-regform-4/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -31,11 +31,13 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 
 <body>
-    <h3></i><i class="fas fa-heart"></i> Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h3>
+    <h3 class="btn-outline-light " style="text-align: center; margin: 20px; margin-bottom: 20px;"></i><i class="fas fa-heart"></i> Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to Love Website.</h3>
     <?php
     $preferred_gender = $_SESSION['prefgender'];
     $user_id = $_SESSION['id'];
+    // fetching all needed rows from db.
     $rows = GetQuery("SELECT * from user where id not in (select matched_id from matches where matcher_id ='$user_id') and gender='$preferred_gender' and id != '$user_id'");
+
     ?>
     <!-- Create a card -->
     <?php foreach ($rows as $row) { ?>
@@ -72,43 +74,37 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 
 
-    <div class="was-active">
-        <div class="was-action">
-            <?php
-            $user_id = $_SESSION['id'];
-            $data = GetQuery("SELECT * from user where id in (select matched_id from matches where matcher_id = $user_id and action = 1)");
-            ?>
-            <h1>liked</h1>
-            <?php foreach ($data as $row) { ?>
-                <div class="">
-                    <h5 class="card-title"><?php echo  $row["firstname"] . " " . $row["lastname"] . ", " . $row["age"] ?></h5><br>
-                </div>
-            <?php
-            }
-            ?>
-            <?php
-            $user_id = $_SESSION['id'];
-            $data = GetQuery("SELECT * from user where id in (select matched_id from matches where matcher_id = $user_id and action = 0)");
-            ?> <h1>disliked</h1>
-            <?php foreach ($data as $row) { ?>
-                <div class="">
+    <div class="btn-outline-light was-active" style="text-align: center;">
+        <?php
+        // select all users liked
+        $user_id = $_SESSION['id'];
+        $data = GetQuery("SELECT * from user where id in (select matched_id from matches where matcher_id = $user_id and action = 1)");
+        ?>
+        <h4>Liked</h4>
+        <?php foreach ($data as $row) { ?>
+            <p> <?php echo  $row["firstname"] . " " . $row["lastname"] . ", " . $row["age"] ?> </p>
+        <?php
+        }
+        ?>
 
-                    <h5 class="card-title"><?php echo  $row["firstname"] . " " . $row["lastname"] . ", " . $row["age"] ?></h5><br>
-                </div>
-            <?php
-            }
-            ?>
-        </div>
-
+        <?php
+        $user_id = $_SESSION['id'];
+        // select all unliked useres 
+        $data = GetQuery("SELECT * from user where id in (select matched_id from matches where matcher_id = $user_id and action = 0)");
+        ?>
+        <h4>Disliked</h4>
+        <?php foreach ($data as $row) { ?>
+            <?php echo  $row["firstname"] . " " . $row["lastname"] . ", " . $row["age"] ?>
+        <?php
+        }
+        ?>
     </div>
-
-
 
     <div class="btn-group mt-2 mb-4" role="group" aria-label="actionButtons">
         <a href="reset-password.php" class="d-block btn btn-outline-light">Reset Your Password</a>
         <a href="logout.php" class="d-block btn btn-outline-light">Sign Out </a>
     </div>
-    <script src="./colorlib-regform-4/js/tindercard.js"></script>
+    <script src="../colorlib-regform-4/js/tindercard.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" integrity="sha256-qM7QTJSlvtPSxVRjVWNM2OfTAz/3k5ovHOKmKXuYMO4=" crossorigin="anonymous"></script>
 </body>
 
